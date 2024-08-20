@@ -1,0 +1,26 @@
+; extends
+
+[
+  (new_expression)
+  (array)
+  (arrow_function)
+  (call_expression)
+  (class)
+  (false)
+  (function_expression)
+  (generator_function)
+  (meta_property)
+  (non_null_expression)
+  (null)
+  (number)
+  (object)
+  (parenthesized_expression)
+  (regex)
+  (string)
+  (subscript_expression)
+  (super)
+  (template_string)
+  (this)
+  (true)
+  (undefined)
+]+ @expr

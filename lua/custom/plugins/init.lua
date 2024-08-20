@@ -2,6 +2,8 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+require 'lazy'
+---@type LazySpec
 return {
   {
     'folke/flash.nvim',
@@ -74,41 +76,82 @@ return {
       }
     end,
   },
-  -- {
-  --   'folke/trouble.nvim',
-  --   opts = {}, -- for default options, refer to the configuration section for custom setup.
-  --   cmd = 'Trouble',
-  --   keys = {
-  --     {
-  --       '<leader>xx',
-  --       '<cmd>Trouble diagnostics toggle<cr>',
-  --       desc = 'Diagnostics (Trouble)',
-  --     },
-  --     {
-  --       '<leader>xX',
-  --       '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-  --       desc = 'Buffer Diagnostics (Trouble)',
-  --     },
-  --     {
-  --       '<leader>cs',
-  --       '<cmd>Trouble symbols toggle focus=false<cr>',
-  --       desc = 'Symbols (Trouble)',
-  --     },
-  --     {
-  --       '<leader>cl',
-  --       '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-  --       desc = 'LSP Definitions / references / ... (Trouble)',
-  --     },
-  --     {
-  --       '<leader>xL',
-  --       '<cmd>Trouble loclist toggle<cr>',
-  --       desc = 'Location List (Trouble)',
-  --     },
-  --     {
-  --       '<leader>xQ',
-  --       '<cmd>Trouble qflist toggle<cr>',
-  --       desc = 'Quickfix List (Trouble)',
-  --     },
-  --   },
-  -- },
+  {
+    'folke/trouble.nvim',
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = 'Trouble',
+    keys = {
+      {
+        '<leader>xx',
+        '<cmd>Trouble diagnostics toggle<cr>',
+        desc = 'Diagnostics (Trouble)',
+      },
+      {
+        '<leader>xX',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        desc = 'Buffer Diagnostics (Trouble)',
+      },
+      {
+        '<leader>cs',
+        '<cmd>Trouble symbols toggle focus=false<cr>',
+        desc = 'Symbols (Trouble)',
+      },
+      {
+        '<leader>cl',
+        '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
+        desc = 'LSP Definitions / references / ... (Trouble)',
+      },
+      {
+        '<leader>xL',
+        '<cmd>Trouble loclist toggle<cr>',
+        desc = 'Location List (Trouble)',
+      },
+      {
+        '<leader>xQ',
+        '<cmd>Trouble qflist toggle<cr>',
+        desc = 'Quickfix List (Trouble)',
+      },
+    },
+  },
+  {
+    'MagicDuck/grug-far.nvim',
+    config = function()
+      require('grug-far').setup {}
+    end,
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
+    dependencies = {
+      'adaszko/tree_climber_rust.nvim',
+    },
+    init = function()
+      require 'rustaceanvim'
+      vim.g.rustaceanvim = {
+        -- LSP configuration
+        ---@type rustaceanvim.lsp.ClientOpts
+        -- server = {
+        -- default_settings = {
+        --   -- rust-analyzer language server configuration
+        --   ['rust-analyzer'] = {
+        --     ['check.enable'] = false,
+        --   },
+        -- },
+        -- },
+      }
+    end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
+  {
+    'max397574/better-escape.nvim',
+    config = function()
+      require('better_escape').setup()
+    end,
+  },
+  { 'akinsho/toggleterm.nvim', version = '*', config = true, opts = {
+    open_mapping = [[<c-/>]],
+  } },
 }
